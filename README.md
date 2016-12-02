@@ -1,2 +1,2 @@
 # inventory
-Inventory Control for Naresh
+Inventory Control for Small shops
