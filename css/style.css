@@ -1,0 +1,40 @@
+.ng-empty {
+    background-color: rgba(255, 0, 0, 0.32);
+}
+
+.list {
+    position: absolute;
+    z-index: 999;
+    list-style-type: none;
+    padding-left: 0px;
+    background-color: yellowgreen;
+}
+
+
+.list li {
+    padding: 5px;
+}
+
+.list li:hover {
+    background-color: wheat;
+    cursor: pointer;
+}
+
+input#item {
+    width: 100%;
+}
+
+#matdisp{
+    list-style-type: none;
+}
+
+#matdisp li div{
+    border: 1px solid;
+}
+
+.datepickerdemoBasicUsage md-content {
+    padding-bottom: 200px; }
+.datepickerdemoBasicUsage .validation-messages {
+    font-size: 12px;
+    color: #dd2c00;
+    margin-left: 15px; }

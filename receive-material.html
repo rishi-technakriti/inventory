@@ -1,0 +1,59 @@
+<div ng-controller="receiveupdateController as recvudCtrl">
+    <table class="table table-striped" ng-show="recvudCtrl.show =='main'">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>DO No.</th>
+                <th>Item</th>
+                <th class="text-center">Received Quantity</th>
+                <th class="text-center">Damaged Quantity</th>
+                <th class="text-center">Shortage Quantity</th>
+                <th class="text-center">Actual Quantity</th>
+                <th class="text-center">Edit/Delete</th>
+            </tr>                
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in recvudCtrl.supplierdata"> 
+                <td>{{x[1]|date:'dd/MM/yyyy'}}</td>
+                <td>{{x[2]}}</td>
+                <td>{{x[3]}}</td>
+                <td class="text-right">{{x[4]|number:2}}</td>
+                <td class="text-right">{{x[5]|number:2}}</td>
+                <td class="text-right">{{x[6]|number:2}}</td>
+                <td class="text-right">{{x[7]|number:2}}</td>
+                <td class="text-right">
+                    <button type="button" class="btn btn-primary" ng-click="recvudCtrl.update(x)">Update</button>
+                    <button type="button" class="btn btn-danger" ng-click="recvudCtrl.delete(x)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container" ng-show="recvudCtrl.show == 'upd'">
+        <form class="form-horizontal col-md-5">
+            <div class="form-group">
+                <p>Date: {{recvudCtrl.date|date:'dd/MM/yyyy'}}</p>
+                <p>DO No.: {{recvudCtrl.do}}</p>
+                <p>Item: {{recvudCtrl.item}}</p>    
+            </div>
+            <div class="form-group">
+                <label for="mobnum" class="control-label">Recieved: </label>
+                <input type="text" id="mobnum" class="form-control" ng-model="recvudCtrl.rcvdqty">    
+            </div>
+            <div class="form-group">
+                <label for="mobnum" class="control-label">Damaged: </label>
+                <input type="text" id="mobnum" class="form-control" ng-model="recvudCtrl.dmgqty">    
+            </div>
+            <div class="form-group">
+                <label for="mobnum" class="control-label">Shortage: </label>
+                <input type="text" id="mobnum" class="form-control" ng-model="recvudCtrl.shtqty">    
+            </div>
+            <button type="button" class="btn btn-success" ng-click="recvudCtrl.updatevalue()">Update Value</button>
+            <button type="button" class="btn btn-info" ng-click="recvudCtrl.cancel()">Cancel</button>        
+        </form>        
+    </div>
+    <div class="container" ng-show="recvudCtrl.show == 'dlt'">
+        <h3>Do you want to delete the data</h3>
+        <button type="button" class="btn btn-danger" ng-click="recvudCtrl.deletevalue()">Delete Value</button>
+        <button type="button" class="btn btn-info" ng-click="recvudCtrl.cancel()">Cancel</button>
+    </div>
+</div>

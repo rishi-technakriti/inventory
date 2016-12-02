@@ -1,0 +1,87 @@
+<!--Material Reciept Section-->
+                <div ng-controller="receiveController as recCtrl">
+                    <div class="row" ng-show="recCtrl.show == 'data'">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8">
+                            <form class="form-horizontal" ng-submit="recCtrl.showrecords()" novalidate>
+                                <div class="form-group">
+                                    <label for="supplier" class="control-label" >Supplier:</label>                    
+                                        <input type="text" id="supplier" ng-model="recCtrl.supplier" ng-keyup="recCtrl.showsupp()" autocomplete="off" required class="form-control">
+                                        <ul class="list">
+                                            <li ng-repeat="x in recCtrl.displistsupp" ng-click="recCtrl.listsupplier(x)">{{x}}</li>
+                                        </ul>    
+                                </div>
+                                <div class="form-group">
+                                    <label for="addsupp" class="control-label">Address:</label>
+                                    <input type="text" id="addsupp" ng-model="recCtrl.addsupp" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobnumsupp" class="control-label">Mobile:</label>
+                                    <input type="text" id="mobnumsupp" ng-model="recCtrl.mobnumsupp" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="do" class="control-label">Delivery Note No.:</label>
+                                    <input type="text" id="do" ng-model="recCtrl.do" class="form-control">    
+                                </div>
+                                <div class="form-group">
+                                    <label for="date" class="control-label">Date:</label>
+                                    <input type="date" id="date" ng-model="recCtrl.supdate" required class="form-control">
+                                </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th class="text-center">Received Quantity</th>
+                                            <th class="text-center">Damaged Quantity</th>
+                                            <th class="text-center">Shortage Quantity</th>
+                                            <th class="text-center">Add/Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="x in recCtrl.itemlistrec">
+                                            <td>{{x.name}}</td>
+                                            <td class="text-right">{{x.rcvdqty|number:2}}</td>
+                                            <td class="text-right">{{x.dmgqty|number:2}}</td>
+                                            <td class="text-right">{{x.shtqty|number:2}}</td>
+                                            <td class="text-right"><button type="button" ng-click="recCtrl.deleteitemrec($index)" class="btn btn-danger">x</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="text" id="itemrec" value="" ng-model="recCtrl.itemrec" ng-keyup="recCtrl.showmatrec()" autocomplete="off" class="form-control">
+                                                <ul class="list">
+                                                    <li ng-repeat="x in recCtrl.dispmatrec" ng-click="recCtrl.listitemrec(x)">{{x}}</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="rcvdqty" value="0" ng-model="recCtrl.rcvdqty" class="form-control text-right">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="dmgqty" value="0" ng-model="recCtrl.dmgqty" class="form-control text-right">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="shtqty" value="0" ng-model="recCtrl.shtqty" class="form-control text-right">
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" ng-click="recCtrl.additemrec(recCtrl.itemrec,recCtrl.rcvdqty,recCtrl.dmgqty,recCtrl.shtqty);" >Add</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4" class="text-right"><strong>Press to enter data in Database -------></strong></td>
+                                            <td><button type="submit" class="btn btn-primary" >Enter Data</button></td>
+                                        </tr>
+                                    </tfoot>
+                                </table><br>
+                            </form>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+
+<!--Material Receipt Confirmation-->
+                    <div ng-show="recCtrl.show == 'conf'">
+                        <div>
+                            <h2>{{recCtrl.showdatastatus}} </h2>   
+                        </div>
+                    </div>
+                </div>

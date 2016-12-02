@@ -1,0 +1,28 @@
+<div ng-controller="materialController as matCtrl">
+    <table class="table table-striped" ng-show="matCtrl.show =='main'">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Edit/Delete</th>
+            </tr>                
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in matCtrl.materialdata"> 
+                <td>{{x[1]}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" ng-click="matCtrl.update(x)">Update</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container" ng-show="matCtrl.show == 'upd'">
+        <form class="form-horizontal col-md-5">
+            <div class="form-group">
+                <label for="item" class="control-label">Item : </label>
+                <input type="text" id="name" class="form-control" ng-model="matCtrl.item">    
+            </div>
+            <button type="button" class="btn btn-success" ng-click="matCtrl.updatevalue()">Update Value</button>
+            <button type="button" class="btn btn-info" ng-click="matCtrl.cancel()">Cancel</button>        
+        </form>        
+    </div>
+</div>

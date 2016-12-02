@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="angular.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body>
+        <div ng-controller="contentController as conCtrl" class="container-fluid">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Inventory Management System</a>
+                    </div>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#home" ng-click="conCtrl.settab('home')">Home</a></li>
+                            <li><a href="#material-receipt" ng-click="conCtrl.settab('matrec')">Material Receipt</a></li>
+                            <li><a href="#material-sold" ng-click="conCtrl.settab('matsold')">Material Sold</a></li> 
+                            <li><a href="#status">Status</a></li> 
+                        </ul>
+                </div>
+            </nav>
+            <div ng-switch="conCtrl.tab">
+
+<!--Home Page-->
+                <div ng-switch-when="home">
+                    i will populated
+                </div>
+
+<!--Material Reciept Section-->
+                <div ng-switch-when="matrec">
+                    <form class="form-group" ng-submit="conCtrl.showrecords()" novalidate>
+                        <label for="supplier" class="col-md-2" >Supplier:</label>                    
+                        <div class="col-md-10">
+                        <input type="text" id="supplier" ng-model="conCtrl.supplier" ng-keyup="conCtrl.showsupp()" autocomplete="off" required>
+                        <ul class="list">
+                            <li ng-repeat="x in conCtrl.displistsupp" ng-click="conCtrl.listsupplier(x)">{{x}}</li>
+                        </ul>    
+                        </div>
+                        <div>
+                            <label for="addsupp">Address:</label>
+                            <input type="text" id="addsupp" ng-model="conCtrl.addsupp" >
+                        </div>
+                        <div>
+                            <label for="mobnumsupp">Mobile:</label>
+                            <input type="text" id="mobnumsupp" ng-model="conCtrl.mobnumsupp">
+                        </div>
+                        <br><br>
+                        <label for="date" class="col-md-2">Date:</label>
+                        <input type="date" id="date" ng-model="conCtrl.supdate" required>
+                        <br>
+                        <ul class="container" id="matdisprec">
+                            <li ng-repeat="x in conCtrl.itemlistrec">
+                                <div class="col-md-5">
+                                    {{x.name}}                                    
+                                </div>
+                                <div class="col-md-2">
+                                    {{x.rcvdqty}}                                    
+                                </div>
+                                <div class="col-md-2">
+                                    {{x.dmgqty}}                                    
+                                </div>
+                                <div class="col-md-2">
+                                    {{x.shtqty}}                                    
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" ng-click="conCtrl.deleteitemrec($index)" class="btn btn-danger">x</button>
+                                </div>
+                            </li>    
+                        </ul>
+                        <div class="container">
+                            <div class="col-md-5">
+                                <label for="itemrec">Item:</label><br>
+                                <input type="text" id="itemrec" value="" ng-model="conCtrl.itemrec" ng-keyup="conCtrl.showmatrec()">
+                                <ul class="list">
+                                    <li ng-repeat="x in conCtrl.dispmatrec" ng-click="conCtrl.listitemrec(x)">{{x}}</li>
+                                </ul>                                 
+                            </div>
+                            <div class="col-md-2">
+                                <label for="qty">Received Quantity:</label><br>
+                                <input type="text" id="rcvdqty" value="0" ng-model="conCtrl.rcvdqty">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="qty">Damaged Quantity:</label><br>
+                                <input type="text" id="dmgqty" value="0" ng-model="conCtrl.dmgqty">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="qty">Shortage Quantity:</label><br>
+                                <input type="text" id="shtqty" value="0" ng-model="conCtrl.shtqty">
+                            </div>
+                            <button type="button" class="col-md-1 btn btn-primary" ng-click="conCtrl.additemrec(conCtrl.itemrec,conCtrl.rcvdqty,conCtrl.dmgqty,conCtrl.shtqty);" >Add</button><br><br>    
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Enter Data</button>    
+                    </form>
+                </div>
+
+<!--Material Receipt Confirmation-->
+                <div ng-switch-when="matreccon">
+                    <div>
+                        {{conCtrl.showdatastatus}}    
+                    </div>
+                </div>
+
+<!--Material Sold Section-->
+                <div ng-switch-when="matsold">
+                    <form class="form-group" ng-submit="conCtrl.showinvoice()" novalidate>
+                        <label for="customer" class="col-md-2" >Customer:</label>                    
+                        <div class="col-md-10">
+                        <input type="text" id="customer" ng-model="conCtrl.customer" ng-keyup="conCtrl.showcust()" autocomplete="off" required>
+                        <ul class="list">
+                            <li ng-repeat="x in conCtrl.displistcust" ng-click="conCtrl.listcustomer(x)">{{x}}</li>
+                        </ul>    
+                        </div>
+                        <div>
+                            <label for="addcust">Address:</label>
+                            <input type="text" id="addcust" ng-model="conCtrl.addcust" >
+                        </div>
+                        <div>
+                            <label for="mobnumcust">Mobile:</label>
+                            <input type="text" id="mobnumcust" ng-model="conCtrl.mobnumcust">
+                        </div>
+                        <br><br>
+                        <label for="datecust" class="col-md-2">Date:</label>
+                        <input type="date" id="datecust" ng-model="conCtrl.custdate" required>
+                        <br>
+                        <ul class="container" id="matdispsold">
+                            <li ng-repeat="x in conCtrl.itemlistsold">
+                                <div class="col-md-5">
+                                    {{x.name}}                                    
+                                </div>
+                                <div class="col-md-2">
+                                    {{x.soldqty}}                                    
+                                </div>
+                                <div class="col-md-2">
+                                    {{x.soldprice}}                                    
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" ng-click="conCtrl.deleteitemsold($index)" class="btn btn-danger">x</button>
+                                </div>
+                            </li>    
+                        </ul>
+                        <div class="container">
+                            <div class="col-md-5">
+                                <label for="itemsold">Item:</label><br>
+                                <input type="text" id="itemsold" value="" ng-model="conCtrl.itemsold" ng-keyup="conCtrl.showmatsold()">
+                                <ul class="list">
+                                    <li ng-repeat="x in conCtrl.dispmatsold" ng-click="conCtrl.listitemsold(x)">{{x}}</li>
+                                </ul>                                 
+                            </div>
+                            <div class="col-md-2">
+                                <label for="soldqty">Sold Quantity:</label><br>
+                                <input type="text" id="soldqty" value="0" ng-model="conCtrl.soldqty">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="soldprice">Price:</label><br>
+                                <input type="text" id="soldprice" value="0" ng-model="conCtrl.soldprice">
+                            </div>
+                            <button type="button" class="col-md-1 btn btn-primary" ng-click="conCtrl.additemsold(conCtrl.itemsold,conCtrl.soldqty,conCtrl.soldprice);" >Add</button><br><br>    
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Enter Data</button>    
+                    </form>
+                </div>
+                <div ng-switch-when="matsoldcon">
+                    <div>
+                        {{conCtrl.showdatastatus}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

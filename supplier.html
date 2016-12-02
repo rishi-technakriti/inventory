@@ -1,0 +1,40 @@
+<div ng-controller="supplierController as suppCtrl">
+    <table class="table table-striped" ng-show="suppCtrl.show =='main'">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Mobile Number</th>
+                <th>Edit/Delete</th>
+            </tr>                
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in suppCtrl.supplierdata"> 
+                <td>{{x[1]}}</td>
+                <td>{{x[2]}}</td>
+                <td>{{x[3]}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" ng-click="suppCtrl.update(x)">Update</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container" ng-show="suppCtrl.show == 'upd'">
+        <form class="form-horizontal col-md-5">
+            <div class="form-group">
+                <label for="name" class="control-label">Name: </label>
+                <input type="text" id="name" class="form-control" ng-model="suppCtrl.name">    
+            </div>
+            <div class="form-group">
+                <label for="address" class="control-label">Address: </label>
+                <input type="text" id="address" class="form-control" ng-model="suppCtrl.address">    
+            </div>
+            <div class="form-group">
+                <label for="mobnum" class="control-label">Mobile Number: </label>
+                <input type="text" id="mobnum" class="form-control" ng-model="suppCtrl.mobnum">    
+            </div>
+            <button type="button" class="btn btn-success" ng-click="suppCtrl.updatevalue()">Update Value</button>
+            <button type="button" class="btn btn-info" ng-click="suppCtrl.cancel()">Cancel</button>        
+        </form>        
+    </div>
+</div>

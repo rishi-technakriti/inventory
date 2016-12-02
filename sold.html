@@ -1,0 +1,64 @@
+<!--Material Sold Section-->
+                <div ng-controller="soldController as soldCtrl">
+                    <form class="form-group" ng-submit="soldCtrl.showinvoice()" novalidate>
+                        <label for="customer" class="col-md-2" >Customer:</label>                    
+                        <div class="col-md-10">
+                        <input type="text" id="customer" ng-model="soldCtrl.customer" ng-keyup="soldCtrl.showcust()" autocomplete="off" required>
+                        <ul class="list">
+                            <li ng-repeat="x in soldCtrl.displistcust" ng-click="soldCtrl.listcustomer(x)">{{x}}</li>
+                        </ul>    
+                        </div>
+                        <div>
+                            <label for="addcust">Address:</label>
+                            <input type="text" id="addcust" ng-model="soldCtrl.addcust" >
+                        </div>
+                        <div>
+                            <label for="mobnumcust">Mobile:</label>
+                            <input type="text" id="mobnumcust" ng-model="soldCtrl.mobnumcust">
+                        </div>
+                        <br><br>
+                        <label for="datecust" class="col-md-2">Date:</label>
+                        <input type="date" id="datecust" ng-model="soldCtrl.custdate" required>
+                        <br>
+                        <ul class="container" id="matdispsold">
+                            <li ng-repeat="x in soldCtrl.itemlistsold">
+                                <div class="col-md-5">
+                                    {{x.name}}                                    
+                                </div>
+                                <div class="col-md-2">
+                                    {{x.soldqty}}                                    
+                                </div>
+                                <div class="col-md-2">
+                                    {{x.soldprice}}                                    
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" ng-click="soldCtrl.deleteitemsold($index)" class="btn btn-danger">x</button>
+                                </div>
+                            </li>    
+                        </ul>
+                        <div class="container">
+                            <div class="col-md-5">
+                                <label for="itemsold">Item:</label><br>
+                                <input type="text" id="itemsold" value="" ng-model="soldCtrl.itemsold" ng-keyup="soldCtrl.showmatsold()">
+                                <ul class="list">
+                                    <li ng-repeat="x in soldCtrl.dispmatsold" ng-click="soldCtrl.listitemsold(x)">{{x}}</li>
+                                </ul>                                 
+                            </div>
+                            <div class="col-md-2">
+                                <label for="soldqty">Sold Quantity:</label><br>
+                                <input type="text" id="soldqty" value="0" ng-model="soldCtrl.soldqty">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="soldprice">Price:</label><br>
+                                <input type="text" id="soldprice" value="0" ng-model="soldCtrl.soldprice">
+                            </div>
+                            <button type="button" class="col-md-1 btn btn-primary" ng-click="soldCtrl.additemsold(soldCtrl.itemsold,soldCtrl.soldqty,soldCtrl.soldprice);" >Add</button><br><br>    
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Enter Data</button>    
+                    </form>
+                </div>
+                <div>
+                    <div>
+                        {{soldCtrl.showdatastatus}}
+                    </div>
+                </div>
