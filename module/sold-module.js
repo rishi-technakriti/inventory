@@ -21,6 +21,8 @@ _this.itemidsold = '';
 _this.dispmatsold = [];
 _this.supdate = '';
 _this.itemlistsold = [];
+_this.type = 'est';
+_this.prsheet = 'dataentry';
 
 // for using with autocomplete on main page
 var autocmpt = function (input,list){
@@ -115,7 +117,7 @@ _this.deleteitemsold = function(value){
 };
 
 //sending data to server to storage
-_this.showinvoice = function(){
+/*_this.showinvoice = function(){
     if(_this.customer !='' && _this.itemlistsold.length >0){
         var record = {
         custid:_this.custid,
@@ -125,7 +127,7 @@ _this.showinvoice = function(){
         date:_this.custdate,
         item:_this.itemlistsold
         }
-        $http.post('sold.php',record).then(function(response){
+        $http.post('php/sold.php',record).then(function(response){
             if(response.data == 'ok'){
                 _this.showdatastatus = 'Data entered';
             }
@@ -143,7 +145,12 @@ _this.showinvoice = function(){
     else {
         return false;
     }
+};*/
+
+_this.prform = function(value){
+    _this.prsheet = value;
 };
+
 // -------------------------------------------------End of Sold Section--------------------------------------
 
 });

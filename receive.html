@@ -3,7 +3,7 @@
                     <div class="row" ng-show="recCtrl.show == 'data'">
                         <div class="col-md-1"></div>
                         <div class="col-md-8">
-                            <form class="form-horizontal" ng-submit="recCtrl.showrecords()" novalidate>
+                            <form ng-submit="recCtrl.showrecords()" novalidate>
                                 <div class="form-group">
                                     <label for="supplier" class="control-label" >Supplier:</label>                    
                                         <input type="text" id="supplier" ng-model="recCtrl.supplier" ng-keyup="recCtrl.showsupp()" autocomplete="off" required class="form-control">
