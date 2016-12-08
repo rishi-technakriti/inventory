@@ -4,6 +4,109 @@ app.controller('soldController',function($scope, $http){
 
 var _this = this;
 
+_this.prsheet = 'inv';
+_this.customer = 'Rishi';
+_this.addcust = '92/16 Nehru Nagar East';
+_this.mobnumcust = '9827465745';
+_this.custdate = new Date();
+_this.itemlistsold = [{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+},{
+    name:'Bolt', 
+    soldqty: 26,
+    soldprice: 2
+},{
+    name:'Nut', 
+    soldqty: 56,
+    soldprice: 3
+}];
+
+_this.cd = 2;
+_this.tax = 4;
+_this.gross = 0;
+_this.itemlistsold.forEach(function(element) {
+    _this.gross = _this.gross + element.soldqty*element.soldprice;
+}, this);
+_this.cdamt = _this.gross * _this.cd * 0.01;
+_this.taxamt = (_this.gross - _this.cdamt)*_this.tax*0.01 ;
+
+_this.net = _this.gross - _this.cdamt + _this.taxamt;
+_this.print = function(){
+    window.print();
+};
+
+
+/*
 //initiallizing variables
 _this.customer = '';
 _this.customerlist = [];
@@ -19,10 +122,13 @@ _this.matlistsold = [];
 _this.matdatasold = [];
 _this.itemidsold = '';
 _this.dispmatsold = [];
-_this.supdate = '';
+_this.custdate = '';
 _this.itemlistsold = [];
 _this.type = 'est';
 _this.prsheet = 'dataentry';
+_this.cd = 0;
+_this.tax = 0;
+_this.gross = 0;
 
 // for using with autocomplete on main page
 var autocmpt = function (input,list){

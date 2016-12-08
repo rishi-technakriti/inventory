@@ -32,9 +32,44 @@ input#item {
     border: 1px solid;
 }
 
-.datepickerdemoBasicUsage md-content {
-    padding-bottom: 200px; }
-.datepickerdemoBasicUsage .validation-messages {
-    font-size: 12px;
-    color: #dd2c00;
-    margin-left: 15px; }
+/* from old format*/
+.laxmi h2 {
+    text-align: center;
+}
+
+.laxmi h3 {
+    text-align: center;
+}
+
+.heading h4 {
+    text-align: center;
+}
+
+table.disp {
+    margin: 20px;
+}
+
+th.material {
+    width: 0;
+}
+
+td.currn {
+    text-align: right;
+}
+
+.sign {
+    position: relative;
+    padding-top: 100px;
+    left: 70%;
+    bottom: 0%;
+}
+
+.mainheading {
+    text-decoration: underline;
+}
+
+@media print{
+    .btn {
+        display: none;
+    }
+}

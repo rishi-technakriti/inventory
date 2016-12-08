@@ -4,7 +4,8 @@
     'soldModule',
     'supplierModule',
     'materialModule',
-    'receiveupdateModule'
+    'receiveupdateModule',
+    'towordModule'
     ]);
 
 app.config(function($routeProvider){

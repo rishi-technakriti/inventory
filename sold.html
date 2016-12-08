@@ -55,10 +55,10 @@
                                                 </ul>
                                             </td>
                                             <td>
-                                                <input type="text" id="soldqty" value="0" ng-model="soldCtrl.soldqty" class="form-control text-right">
+                                                <input type="number" id="soldqty" value="0" ng-model="soldCtrl.soldqty" class="form-control text-right">
                                             </td>
                                             <td>
-                                                <input type="text" id="soldprice" value="0" ng-model="soldCtrl.soldprice" class="form-control text-right">
+                                                <input type="number" id="soldprice" value="0" ng-model="soldCtrl.soldprice" class="form-control text-right">
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" ng-click="soldCtrl.additemsold(soldCtrl.itemsold,soldCtrl.soldqty,soldCtrl.soldprice);" >Add</button>
@@ -67,13 +67,13 @@
                                        <tr>
                                             <td>
                                                 <input type="checkbox" name="cd" ng-model="soldCtrl.cdchk"> Cash Discount %:
-                                                <span ng-if="soldCtrl.cdchk"><input type="text" class="form-control text-right" value="0"></span>
+                                                <span ng-if="soldCtrl.cdchk"><input type="text" class="form-control text-right" ng-model="soldCtrl.cd"></span>
                                             </td>
                                             <td colspan="4"></td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span ng-if="soldCtrl.type == 'inv'">Tax %: <input type="text" class="form-control text-right" value="0"></span>
+                                                <span ng-if="soldCtrl.type == 'inv'">Tax %: <input type="number" class="form-control text-right" ng-model="soldCtrl.tax"></span>
                                             </td>
                                             <td colspan="4"></td>
                                         </tr>
@@ -93,6 +93,69 @@
                         Estimate
                     </div>
                     <div ng-if="soldCtrl.prsheet=='inv'">
-                        Invoice
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-2">
+                                <div>
+                                    <h4 class="text-center mainheading"><strong>INVOICE</strong></h4>
+                                    <h2><strong>LAXMI MARKERING</strong></h2>
+                                    <h3>Bhilai</h3>
+                                </div>
+                                <div>
+                                    <h5>Customer/Company : {{soldCtrl.customer}}</h5>
+                                    <h5>Address : {{soldCtrl.addcust}}</h5>
+                                    <h5>Contact No.: {{soldCtrl.mobnumcust}}</h5>
+                                    <h5>Date : {{soldCtrl.custdate}}</h5>
+                                    <h5>Bill No. :</h5>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Sno.</th>
+                                        <th>Material</th>
+                                        <th class="text-right">Quantity</th>
+                                        <th class="text-right">Price</th>
+                                        <th class="text-right">Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="x in soldCtrl.itemlistsold">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{x.name}}</td>
+                                        <td class="text-right">{{x.soldqty|number:2}}</td>
+                                        <td class="text-right">{{x.soldprice|number:2}}</td>
+                                        <td class="text-right">{{(x.soldqty*x.soldprice)|number:2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='4'>Gross Total</td>
+                                        <td class="text-right">{{soldCtrl.gross|number:2}}</td>
+                                    </tr>
+                                    <tr ng-if="soldCtrl.cd > 0">
+                                        <td colspan='4'>Cash Discount @ {{soldCtrl.cd}}%</td>
+                                        <td class="text-right">{{soldCtrl.cdamt |number:2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='4'>Tax Rate @ {{soldCtrl.tax}}%</td>
+                                        <td class="text-right">{{soldCtrl.taxamt |number:2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='4'><em><strong>Total Amount</strong></em> >>>></td>
+                                        <td class="text-right"><strong>{{soldCtrl.net |number:2}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5"><strong>Amount in Words >>>> Rs {{soldCtrl.net|words}}</strong></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <div style="padding-top:50px" class="text-right">
+                                For Laxmi Markering
+                                </div>
+                                </div>    
+                            </div>
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-4">
+                                <button class="btn btn-primary" ng-click="soldCtrl.print()">Print & Save</button>                        
+                            </div>
+                        </div>
                     </div>
                 </div>
