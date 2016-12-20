@@ -27,11 +27,11 @@ var tw = ['Twenty','Thirty','Forty','Fifty', 'Sixty','Seventy','Eighty','Ninety'
 
 function toWords(s)
 {  
-    s = s.toString(); 
+    s = s.toString();
     s = s.replace(/[\, ]/g,''); 
     if (s != parseFloat(s)) return 'not a number'; 
-    var x = s.indexOf('.'); 
-    if (x == -1) x = s.length; 
+    var x = s.indexOf('.');
+    if (x == -1) x = s.length;  
     if (x > 15) return 'too big'; 
     var n = s.split(''); 
     var str = ''; 

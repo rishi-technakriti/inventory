@@ -7,7 +7,7 @@ var _this = this;
 // for using with autocomplete on main page
 var autocmpt = function (input,list){
     var display = [];
-    if(input && input.length>2){
+    if(input && input.length>1){
         display = list.filter(function(value){
             var valuelow = value.toLowerCase();
             var inputlow = input.toLowerCase() ;
@@ -39,7 +39,7 @@ _this.matlistrec = [];
 _this.matdatarec = [];
 _this.itemidrec = '';
 _this.dispmatrec = [];
-_this.supdate = '';
+_this.supdate = new Date();
 _this.itemlistrec = [];
 _this.showdatastatus='working....';
 _this.show = 'data';
@@ -145,7 +145,7 @@ _this.showrecords = function(){
         _this.addsupp='';
         _this.mobnumsupp='';
         _this.do='';
-        _this.supdate='';
+        _this.supdate=new Date();
         _this.itemlistrec=[];
         setTimeout(function(){
             _this.show = 'data';

@@ -6,10 +6,10 @@
                             <form ng-submit="recCtrl.showrecords()" novalidate>
                                 <div class="form-group">
                                     <label for="supplier" class="control-label" >Supplier:</label>                    
-                                        <input type="text" id="supplier" ng-model="recCtrl.supplier" ng-keyup="recCtrl.showsupp()" autocomplete="off" required class="form-control">
-                                        <ul class="list">
-                                            <li ng-repeat="x in recCtrl.displistsupp" ng-click="recCtrl.listsupplier(x)">{{x}}</li>
-                                        </ul>    
+                                        <input type="text" list="suplist" id="supplier" ng-model="recCtrl.supplier" ng-keyup="recCtrl.showsupp()" ng-blur="recCtrl.listsupplier(recCtrl.supplier)" autocomplete="off" required class="form-control">
+                                        <datalist id="suplist">
+                                            <option ng-repeat="x in recCtrl.displistsupp" value="{{x}}"></option>
+                                        </datalist>    
                                 </div>
                                 <div class="form-group">
                                     <label for="addsupp" class="control-label">Address:</label>
@@ -47,10 +47,10 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <input type="text" id="itemrec" value="" ng-model="recCtrl.itemrec" ng-keyup="recCtrl.showmatrec()" autocomplete="off" class="form-control">
-                                                <ul class="list">
-                                                    <li ng-repeat="x in recCtrl.dispmatrec" ng-click="recCtrl.listitemrec(x)">{{x}}</li>
-                                                </ul>
+                                                <input type="text" id="itemrec" list="matlist" ng-model="recCtrl.itemrec" ng-keyup="recCtrl.showmatrec()"  ng-blur="recCtrl.listitemrec(recCtrl.itemrec)" autocomplete="off" class="form-control">
+                                                <datalist id="matlist">
+                                                    <option ng-repeat="x in recCtrl.dispmatrec" value="{{x}}" ></option>
+                                                </datalist>
                                             </td>
                                             <td>
                                                 <input type="text" id="rcvdqty" value="0" ng-model="recCtrl.rcvdqty" class="form-control text-right">

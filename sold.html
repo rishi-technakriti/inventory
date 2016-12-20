@@ -14,10 +14,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="customer" class="control-label" >Customer:</label>
-                                    <input type="text" class="form-control" id="customer" ng-model="soldCtrl.customer" ng-keyup="soldCtrl.showcust()" autocomplete="off" required>
-                                        <ul class="list">
-                                            <li ng-repeat="x in soldCtrl.displistcust" ng-click="soldCtrl.listcustomer(x)">{{x}}</li>
-                                        </ul>    
+                                    <input list="custlist" type="text" class="form-control" id="customer" ng-model="soldCtrl.customer" ng-blur="soldCtrl.listcustomer(soldCtrl.customer)" ng-keyup="soldCtrl.showcust()" autocomplete="off" required>
+                                        <datalist id="custlist">
+                                            <option ng-repeat="x in soldCtrl.displistcust" value="{{x}}">
+                                        </datalist>    
                                 </div>
                                 <div class="form-group">
                                     <label for="addcust" class="control-label">Address:</label>
@@ -49,10 +49,10 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <input type="text" id="itemsold" ng-model="soldCtrl.itemsold" ng-keyup="soldCtrl.showmatsold()" class="form-control">
-                                                <ul class="list">
-                                                    <li ng-repeat="x in soldCtrl.dispmatsold" ng-click="soldCtrl.listitemsold(x)">{{x}}</li>
-                                                </ul>
+                                                <input type="text" list="matlist" id="itemsold" ng-model="soldCtrl.itemsold" ng-keyup="soldCtrl.showmatsold()"  ng-blur="soldCtrl.listitemsold(soldCtrl.itemsold)" class="form-control">
+                                                <datalist id="matlist">
+                                                    <option ng-repeat="x in soldCtrl.dispmatsold" value="{{x}}">
+                                                </datalist>
                                             </td>
                                             <td>
                                                 <input type="number" id="soldqty" value="0" ng-model="soldCtrl.soldqty" class="form-control text-right">
@@ -67,7 +67,7 @@
                                        <tr>
                                             <td>
                                                 <input type="checkbox" name="cd" ng-model="soldCtrl.cdchk"> Cash Discount %:
-                                                <span ng-if="soldCtrl.cdchk"><input type="text" class="form-control text-right" ng-model="soldCtrl.cd"></span>
+                                                <span ng-if="soldCtrl.cdchk"><input type="number" class="form-control text-right" ng-model="soldCtrl.cd"></span>
                                             </td>
                                             <td colspan="4"></td>
                                         </tr>
@@ -90,23 +90,118 @@
                         <div class="col-md-1"></div>
                     </div>
                     <div ng-if="soldCtrl.prsheet=='est'">
-                        Estimate
-                    </div>
-                    <div ng-if="soldCtrl.prsheet=='inv'">
                         <div class="row">
-                            <div class="col-md-6 col-md-offset-2">
-                                <div>
-                                    <h4 class="text-center mainheading"><strong>INVOICE</strong></h4>
-                                    <h2><strong>LAXMI MARKERING</strong></h2>
-                                    <h3>Bhilai</h3>
+                            <div class="col-sm-12">
+                                <div class="row totft">
+                                    <div class="smallft">
+                                    <!-- Left Blank for Estimate -->
+                                    </div>
+                                    <div class="bigft">
+                                        <h4 class="text-center mainheading"><strong>ESTIMATE</strong></h4>
+                                        <h2 class="text-center"><strong>LAXMI MARKERING</strong></h2>
+                                    </div>
+                                    <div class="smallft text-right">
+                                        Mob: 09993245787
+                                    </div>
+                                    <div class="clrft"></div>  
                                 </div>
+                                <div>
+                                    <h4 class="text-center">526 Model Town Nehru Nagar Bhilai - Durg 490020 (C.G.)</h4>    
+                                </div> <hr>
                                 <div>
                                     <h5>Customer/Company : {{soldCtrl.customer}}</h5>
                                     <h5>Address : {{soldCtrl.addcust}}</h5>
                                     <h5>Contact No.: {{soldCtrl.mobnumcust}}</h5>
-                                    <h5>Date : {{soldCtrl.custdate}}</h5>
-                                    <h5>Bill No. :</h5>
+                                    <h5>Date : {{soldCtrl.custdate|date:dd/MMM/yyyy}}</h5>
+                                </div> <hr>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Sno.</th>
+                                        <th>Material</th>
+                                        <th class="text-right">Quantity</th>
+                                        <th class="text-right">Price</th>
+                                        <th class="text-right">Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="x in soldCtrl.itemlistsold">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{x.name}}</td>
+                                        <td class="text-right">{{x.soldqty|number:2}}</td>
+                                        <td class="text-right">{{x.soldprice|number:2}}</td>
+                                        <td class="text-right">{{(x.soldqty*x.soldprice)|number:2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='4'>Gross Total</td>
+                                        <td class="text-right">{{soldCtrl.gross|number:2}}</td>
+                                    </tr>
+                                    <tr ng-if="soldCtrl.cd > 0">
+                                        <td colspan='4'>Cash Discount @ {{soldCtrl.cd}}%</td>
+                                        <td class="text-right">{{soldCtrl.cdamt |number:2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='4'>Tax Rate @</td>
+                                        <td class="text-right">As Applicable</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='4'><em><strong>Total Amount</strong></em> >>>></td>
+                                        <td class="text-right"><strong>{{soldCtrl.net |number:2}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5"><strong>Amount in Words >>>> Rs {{soldCtrl.net|number:2|words}}</strong></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="totft">
+                                    <div class="decla">
+                                        <p>Declaration: We Declared that this Invoice shows the actual price of the goods described and that all particulars are true and correct.</p>
+                                    </div>
+                                    <div class="signature text-right">
+                                        E.&.O.E. <br><br><br><br>
+                                        For Laxmi Markering
+                                    </div>
+                                    <div class="clrft"></div>
                                 </div>
+                            </div>    
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-4">
+                                <button class="btn btn-primary" ng-click="soldCtrl.printestimate()">Print</button>
+                                <button class="btn btn-primary" ng-click="soldCtrl.reset()">Reset</button>                        
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="soldCtrl.prsheet=='inv'">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row totft">
+                                    <div class="smallft">
+                                        C.G.S.T. - 13/04/2554/7/S <br>
+                                        C.S.T. - 13/04/1516/C <br>
+                                        W.E.S. - 28/04/2005 <br>
+                                        TIN - 22333302117
+                                    </div>
+                                    <div class="bigft">
+                                        <h4 class="text-center mainheading"><strong>INVOICE</strong></h4>
+                                        <h2 class="text-center"><strong>LAXMI MARKERING</strong></h2>
+                                    </div>
+                                    <div class="smallft text-right">
+                                        Mob: 09993245787
+                                    </div>
+                                    <div class="clrft"></div>  
+                                </div>
+                                <div>
+                                    <h4 class="text-center">526 Model Town Nehru Nagar Bhilai - Durg 490020 (C.G.)</h4>    
+                                </div> <hr>
+                                <div>
+                                    <h5>Bill No. : {{soldCtrl.billshow}}</h5>
+                                    <h5>Customer/Company : {{soldCtrl.customer}}</h5>
+                                    <h5>Address : {{soldCtrl.addcust}}</h5>
+                                    <h5>Contact No.: {{soldCtrl.mobnumcust}}</h5>
+                                    <h5>Date : {{soldCtrl.custdate|date:dd/MMM/yyyy}}</h5>
+                                    <p>Despatch Doc. __________________  Delivery Note ____________________</p>
+                                </div> <hr>
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -142,19 +237,26 @@
                                         <td class="text-right"><strong>{{soldCtrl.net |number:2}}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="5"><strong>Amount in Words >>>> Rs {{soldCtrl.net|words}}</strong></td>
+                                        <td colspan="5"><strong>Amount in Words >>>> Rs {{soldCtrl.net|number:2|words}}</strong></td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                
-                                <div style="padding-top:50px" class="text-right">
-                                For Laxmi Markering
+                                <div class="totft">
+                                    <div class="decla">
+                                        <p>Declaration: We Declared that this Invoice shows the actual price of the goods described and that all particulars are true and correct.</p>
+                                    </div>
+                                    <div class="signature text-right">
+                                        E.&.O.E. <br><br><br><br>
+                                        For Laxmi Markering
+                                    </div>
+                                    <div class="clrft"></div>
                                 </div>
-                                </div>    
-                            </div>
+                            </div>    
+                        </div>
                         <div class="row">
                             <div class="col-md-2 col-md-offset-4">
-                                <button class="btn btn-primary" ng-click="soldCtrl.print()">Print & Save</button>                        
+                                <button class="btn btn-primary" ng-click="soldCtrl.saveinvoice()">Print & Save</button>
+                                <button class="btn btn-primary" ng-click="soldCtrl.reset()">Reset</button>                        
                             </div>
                         </div>
                     </div>

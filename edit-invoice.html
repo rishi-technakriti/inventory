@@ -1,0 +1,88 @@
+<div ng-controller="soldController as soldCtrl">
+    <div class="form-group form-inline" ng-if="soldCtrl.prsheet == 'dataentry'">
+        <label class="control-label">Please select the Invoice number for edit :</label> 
+        <select class="form-control" name="showinv" class="form-control" ng-options="inv for inv in soldCtrl.selectinv" ng-model="soldCtrl.showinv" ng-change="soldCtrl.pntinv()"></select>
+        <hr>
+    </div>
+    <div ng-if="soldCtrl.showinv != '' && soldCtrl.prsheet == 'dataentry'">
+        <div class="col-md-8">
+            <form ng-submit="soldCtrl.editinvoice()" novalidate>
+                <div class="form-group">
+                    <label for="customer" class="control-label" >Customer:</label>
+                    <input list="custlist" type="text" class="form-control" id="customer" ng-model="soldCtrl.customer" ng-blur="soldCtrl.listcustomer(soldCtrl.customer)" ng-keyup="soldCtrl.showcust()" autocomplete="off" required>
+                        <datalist id="custlist">
+                            <option ng-repeat="x in soldCtrl.displistcust" value="{{x}}">
+                        </datalist>    
+                </div>
+                <div class="form-group">
+                    <label for="addcust" class="control-label">Address:</label>
+                    <input type="text" id="addcust" ng-model="soldCtrl.addcust" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="mobnumcust" class="control-label">Mobile:</label>
+                    <input type="text" id="mobnumcust" ng-model="soldCtrl.mobnumcust" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="datecust" class="control-label">Date:</label>
+                    <input type="date" id="datecust" ng-model="soldCtrl.custdate" required class="form-control">    
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th class="text-center">Sold Quantity</th>
+                            <th class="text-center">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in soldCtrl.itemlistsold">
+                            <td>{{x.name}}</td>
+                            <td class="text-right">{{x.soldqty|number:2}}</td>
+                            <td class="text-right">{{x.soldprice|number:2}}</td>
+                            <td><button type="button" ng-click="soldCtrl.deleteitemsold($index)" class="btn btn-danger">x</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" list="matlist" id="itemsold" ng-model="soldCtrl.itemsold" ng-keyup="soldCtrl.showmatsold()"  ng-blur="soldCtrl.listitemsold(soldCtrl.itemsold)" class="form-control">
+                                <datalist id="matlist">
+                                    <option ng-repeat="x in soldCtrl.dispmatsold" value="{{x}}">
+                                </datalist>
+                            </td>
+                            <td>
+                                <input type="number" id="soldqty" value="0" ng-model="soldCtrl.soldqty" class="form-control text-right">
+                            </td>
+                            <td>
+                                <input type="number" id="soldprice" value="0" ng-model="soldCtrl.soldprice" class="form-control text-right">
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" ng-click="soldCtrl.additemsold(soldCtrl.itemsold,soldCtrl.soldqty,soldCtrl.soldprice);" >Add</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <span>Cash Discount %: <input type="number" class="form-control text-right" ng-model="soldCtrl.cd"></span>
+                            </td>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Tax %: <input type="number" class="form-control text-right" ng-model="soldCtrl.tax"></span>
+                            </td>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Press to enter data in Database -------></strong></td>
+                            <td><button type="submit" class="btn btn-primary" >Enter Data</button></td>
+                        </tr>
+                    </tfoot>
+                </table>                                    
+            </form>
+        </div>
+    </div>
+    <div ng-if="soldCtrl.prsheet == 'conf'">
+        {{soldCtrl.displayresult}}
+    </div>
+</div>

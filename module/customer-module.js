@@ -1,7 +1,7 @@
 (function(){
-    var app = angular.module('supplierModule',[]);
+    var app = angular.module('customerModule',[]);
 
-    app.controller('supplierController', function($http){
+    app.controller('customerController', function($http){
         
         var _this = this;
         
@@ -12,7 +12,7 @@
         _this.id = '';
         
         var updatelist = function(){
-                            $http.get('./php/supplier.php').then(function(response){
+                            $http.get('./php/customer.php').then(function(response){
                                 _this.supplierdata = response.data.record;
                             });
                         };
@@ -34,7 +34,7 @@
             address:_this.address,
             mobile:_this.mobnum,
             }
-            $http.post('./php/supplierupdate.php',record).then(function(response){
+            $http.post('./php/customerupdate.php',record).then(function(response){
                 updatelist();
             });
             _this.id = '';

@@ -5,7 +5,8 @@
     'supplierModule',
     'materialModule',
     'receiveupdateModule',
-    'towordModule'
+    'towordModule',
+    'customerModule'
     ]);
 
 app.config(function($routeProvider){
@@ -23,6 +24,12 @@ app.config(function($routeProvider){
         templateUrl:'material.html'
     }) .when("/receive-material",{
         templateUrl:'receive-material.html'
+    }) .when("/customer", {
+        templateUrl:'customer.html'
+    }) .when("/edit-invoice",{
+        templateUrl:'edit-invoice.html'
+    }) .when("/reprint-invoice", {
+        templateUrl:'reprint-invoice.html'
     }) .otherwise({redirectTo:'/'});
 });
 

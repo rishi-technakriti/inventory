@@ -2,24 +2,6 @@
     background-color: rgba(255, 0, 0, 0.32);
 }
 
-.list {
-    position: absolute;
-    z-index: 999;
-    list-style-type: none;
-    padding-left: 0px;
-    background-color: yellowgreen;
-}
-
-
-.list li {
-    padding: 5px;
-}
-
-.list li:hover {
-    background-color: wheat;
-    cursor: pointer;
-}
-
 input#item {
     width: 100%;
 }
@@ -68,8 +50,37 @@ td.currn {
     text-decoration: underline;
 }
 
-@media print{
-    .btn {
-        display: none;
-    }
+.totft{
+    width: 100%;
+}
+
+.smallft {
+    position: relative;
+    width: 20%;
+    min-height: 10px;
+    float: left;
+    font-size: 0.7em;
+    padding-left: 0;
+}
+
+.bigft {
+    position: relative;
+    width: 60%;
+    float: left;
+}
+
+.clrft{
+    clear: both;
+}
+
+.decla {
+    position: relative;
+    width: 65%;
+    float:left;
+}
+
+.signature{
+    position: relative;
+    width : 25%;
+    float:left;
 }
