@@ -16,21 +16,22 @@ $mobile = $json['mobile'];
 $custdate = $json['date'];
 $item = $json['item'];
 
+if($custid == ''){
+    $sql = "INSERT INTO `customer` (`name`,`address`,`mobile`) VALUES ('$name','$address','$mobile')";
+    $result = mysqli_query($con,$sql);
+    $custid = mysqli_insert_id($con);
+}
+
 $sql = "SELECT `bill` FROM `bill` WHERE `bill`='$billno'";
 $result = mysqli_query($con,$sql);
 
 if(mysqli_num_rows($result)==0){
-    $sql = "INSERT INTO `bill` (`bill`,`cd`,`tax`,`gross`,`net`) VALUES ('$billno','$cd','$tax','$gross','$net')";  
+    $sql = "INSERT INTO `bill` (`bill`,`custid`, `cd`,`tax`,`gross`,`net`) VALUES ('$billno','$custid', '$cd','$tax','$gross','$net')";  
     $result = mysqli_query($con,$sql);
     $billid = mysqli_insert_id($con);
-    if($custid == ''){
-        $sql = "INSERT INTO `customer` (`name`,`address`,`mobile`) VALUES ('$name','$address','$mobile')";
-        $result = mysqli_query($con,$sql);
-        $custid = mysqli_insert_id($con);
-    }
 
     foreach ($item as $x) {
-        $sql = "INSERT INTO `stockout` (`billid`,`custid`,`matid`,`date`,`soldqty`,`price`) VALUES ('$billid','$custid','".$x['itemid']."','$custdate','".$x['soldqty']."','".$x['soldprice']."')";
+        $sql = "INSERT INTO `stockout` (`billid`,`matid`,`date`,`soldqty`,`price`) VALUES ('$billid','".$x['itemid']."','$custdate','".$x['soldqty']."','".$x['soldprice']."')";
         $result = mysqli_query($con, $sql);
     }
     
@@ -38,7 +39,6 @@ if(mysqli_num_rows($result)==0){
 }else{
     echo('entered');    
 }
-
 
 mysqli_close($con);
 

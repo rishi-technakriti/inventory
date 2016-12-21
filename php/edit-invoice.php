@@ -16,7 +16,13 @@ $mobile = $json['mobile'];
 $custdate = $json['date'];
 $item = $json['item'];
 
-$sql = "UPDATE `bill` SET `cd`='$cd',`tax`='$tax',`gross`='$gross',`net`='$net' WHERE `bill`='$billno'";
+if($custid == ''){
+        $sql = "INSERT INTO `customer` (`name`,`address`,`mobile`) VALUES ('$name','$address','$mobile')";
+        $result = mysqli_query($con,$sql);
+        $custid = mysqli_insert_id($con);
+}
+
+$sql = "UPDATE `bill` SET `custid`='$custid', `cd`='$cd',`tax`='$tax',`gross`='$gross',`net`='$net' WHERE `bill`='$billno'";
 $result = mysqli_query($con,$sql);
 
 $sql = "SELECT `id`FROM `bill` WHERE `bill`='$billno'";
@@ -24,17 +30,11 @@ $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_all($result);
 $billid = $row[0][0];
 
-if($custid == ''){
-        $sql = "INSERT INTO `customer` (`name`,`address`,`mobile`) VALUES ('$name','$address','$mobile')";
-        $result = mysqli_query($con,$sql);
-        $custid = mysqli_insert_id($con);
-}
-
 $sql = "DELETE FROM `stockout` WHERE `billid` = '$billid'";
 $result = mysqli_query($con,$sql);
 
 foreach ($item as $x) {
-        $sql = "INSERT INTO `stockout` (`billid`,`custid`,`matid`,`date`,`soldqty`,`price`) VALUES ('$billid','$custid','".$x['itemid']."','$custdate','".$x['soldqty']."','".$x['soldprice']."')";
+        $sql = "INSERT INTO `stockout` (`billid`,`matid`,`date`,`soldqty`,`price`) VALUES ('$billid','".$x['itemid']."','$custdate','".$x['soldqty']."','".$x['soldprice']."')";
         $result = mysqli_query($con, $sql);
 }
 

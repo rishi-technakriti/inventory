@@ -231,6 +231,7 @@ _this.pntinv = function(){
     $http.post('./php/reprint-invoice.php',record).then(function(response){
         pulledrec = response.data.record;
 
+        _this.custid = pulledrec[0][10];
         _this.customer = pulledrec[0][0];
         _this.addcust = pulledrec[0][1];
         _this.mobnumcust = pulledrec[0][2];
