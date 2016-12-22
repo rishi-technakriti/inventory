@@ -1,0 +1,22 @@
+<div ng-controller="stockController as stkCtrl">
+    <div class="col-md-6 col-md-offset-2">
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>Material</th>
+                    <th class="text-right">Received Quantity</th>
+                    <th class="text-right">Sold Quantity</th>
+                    <th class="text-right">Balance Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in stkCtrl.stock">
+                    <td>{{x[0]}}</td>
+                    <td class="text-right">{{x[1]|number:2}}</td>
+                    <td class="text-right">{{x[2]|number:2}}</td>
+                    <td class="text-right">{{x[1]-x[2]|number:2}}</td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+</div>

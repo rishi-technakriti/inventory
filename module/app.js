@@ -6,7 +6,8 @@
     'materialModule',
     'receiveupdateModule',
     'towordModule',
-    'customerModule'
+    'customerModule',
+    'statusModule'
     ]);
 
 app.config(function($routeProvider){
@@ -30,6 +31,10 @@ app.config(function($routeProvider){
         templateUrl:'edit-invoice.html'
     }) .when("/reprint-invoice", {
         templateUrl:'reprint-invoice.html'
+    }) .when("/stock",{
+        templateUrl:'stock.html'
+    }) .when("/invoices",{
+        templateUrl:'invoices.html'
     }) .otherwise({redirectTo:'/'});
 });
 

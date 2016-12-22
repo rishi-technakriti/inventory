@@ -1,0 +1,30 @@
+<div ng-controller="invoiceController as invCtrl">
+    <div>
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>Invoice No.</th>
+                    <th class="text-left">Customer Name</th>
+                    <th class="text-right">Gross Amount</th>
+                    <th class="text-right">Cash Disc. %age</th>
+                    <th class="text-right">Cash Disc. Amount</th>
+                    <th class="text-right">Tax %age</th>
+                    <th class="text-right">Tax Amount</th>
+                    <th class="text-right">Net Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in invCtrl.invoice">
+                    <td>{{x[0]}}</td>
+                    <td class="text-left">{{x[1]}}</td>
+                    <td class="text-right">{{x[2]|number:2}}</td>
+                    <td class="text-right">{{x[3]|number:2}}</td>
+                    <td class="text-right">{{x[3]*x[2]*0.01|number:2}}</td>
+                    <td class="text-right">{{x[4]|number:2}}</td>
+                    <td class="text-right">{{(x[2])*(1-x[3]*0.01)*(x[4]*0.01)|number:2}}</td>
+                    <td class="text-right">{{(x[2])*(1-x[3]*0.01)*(1+x[4]*0.01)|number:2}}</td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+</div>
