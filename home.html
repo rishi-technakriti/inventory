@@ -1,4 +1,68 @@
-<div>
-<h1>THIS IS HOME PAGE</h1>
+<div class="container">
+    <p>This application has been developed for <strong>LAXMI MARKETING</strong>  with a view to generate Estimate and Invoice, preparing 
+        database for Suppliers, Customers, Materials and to have a Stock Status of Materials.</p>    
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="#/material-receipt" ng-click="conCtrl.tab='matrec'" ><h3>MATERIAL RECEIPT</h3></a> 
+            <p>This section will be used for entry of incoming materials. The Suppliers name, if exists in the database, will 
+                be shown and the address, mobile no. will be updated from the database. If the name is not in database, it 
+                will be updated with the new entry. Same is the case with item also.</p> 
+        </li>
+
+        <li class="list-group-item">
+            <a href="#/material-sold" ng-click="conCtrl.tab='matsold'"><h3>MATERIAL SOLD</h3></a>
+            <p>This section will be used for entry of sold materials. The Customers name, if exists in the database, will be 
+                shown and the address, mobile no. will be updated from the database. If the name is not in database, it will 
+                be updated with the new entry.</p>
+        </li>
+
+        <li class="list-group-item">
+            <a href="#/status" ng-click="conCtrl.tab='status'"><h3>STATUS</h3></a>
+            <p>This section is for checking and updating the data which has been entered in previous sections.</p> 
+        </li>
+
+        <li class="list-group-item">
+            <ul class="list-group">
+                <li class="list-group-item" ng-click="conCtrl.tab='status'"><a href="#/supplier"><h4>SUPPLIER’S PROFILE</h4></a>
+                <p>This is for updating the data of suppliers i.e. their name, address and mobile no.</p>
+                </li>
+
+                <li class="list-group-item" ng-click="conCtrl.tab='status'"><a href="#/customer"><h4>CUSTOMER’S PROFILE</h4></a>
+                <p>This is for updating the data of customers i.e. their name, address and mobile no.</p>
+                </li>
+
+                <li class="list-group-item" ng-click="conCtrl.tab='status'"><a href="#/material"><h4>MATERIAL DATA</h4></a>
+                <p>This is for updating the data of material names</p>
+                </li>
+
+                <li class="list-group-item" ng-click="conCtrl.tab='status'"><a href="#/receive-material"><h4>RECEIVED MATERIAL DATA</h4></a> 
+                <p>This is for updating the data of material that has been received</p>
+                </li>
+
+                <li class="list-group-item" ng-click="conCtrl.tab='status'"><a href="#/edit-invoice"><h4>EDIT INVOICE</h4></a> 
+                <p>This is editing the invoice that has been saved earlier</p>
+                </li>
+
+                <li class="list-group-item" ng-click="conCtrl.tab='status'"><a href="#/reprint-invoice"><h4>REPRINT INVOICE</h4></a> 
+                <p>This is reprinting of invoice that has been saved earlier</p>
+                </li>
+
+                <li class="list-group-item" ng-click="conCtrl.tab='status'"><a href="#/stock"><h4>STOCK STATUS</h4></a> 
+                <p>This will show the stock status of all materials that has been received and sold.</p>
+                </li>
+
+                <li class="list-group-item" ng-click="conCtrl.tab='status'"><a href="#/invoices"><h4>INVOICES</h4></a> 
+                <p>This will show the invoices that has been generated</p>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+     
+ 
+    
+
+    
 </div>
 
